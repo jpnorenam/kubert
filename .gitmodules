@@ -1,0 +1,6 @@
+[submodule "rt-tests"]
+	path = rt-tests
+	url = git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
+[submodule "k8s-kvm"]
+	path = k8s-kvm
+	url = git@github.com:jpnorenam/k8s-kvm.git
