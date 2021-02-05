@@ -48,7 +48,7 @@ Check the network latency notebook for the performance of the channel.
 
 ### PREEMPT_RT patch
 
-So we will start from a fresh [Fedora 30] installation
+So we will start from a fresh [Fedora 33] installation
 ``` 
 sudo yum update
 ``` 
@@ -56,11 +56,15 @@ sudo yum update
 For sake of simplicity we will use a [precompiled kernel provided by Planet CCRMA]
 ``` 
 sudo rpm -ivh \
-http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/30/x86_64/kernel-rt-core-5.4.24-100.rt15.1.fc30.ccrma.x86_64.rpm \
-http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/30/x86_64/kernel-rt-modules-5.4.24-100.rt15.1.fc30.ccrma.x86_64.rpm \
-http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/30/x86_64/kernel-rt-modules-extra-5.4.24-100.rt15.1.fc30.ccrma.x86_64.rpm \
-http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/30/x86_64/kernel-rt-5.4.24-100.rt15.1.fc30.ccrma.x86_64.rpm
+http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/33/x86_64/kernel-rt-core-5.10.2-200.rt20.1.fc33.ccrma.x86_64.rpm \
+http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/33/x86_64/kernel-rt-modules-5.10.2-200.rt20.1.fc33.ccrma.x86_64.rpm \
+http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/33/x86_64/kernel-rt-modules-extra-5.10.2-200.rt20.1.fc33.ccrma.x86_64.rpm \
+http://ccrma.stanford.edu/planetccrma/mirror/fedora/linux/planetcore/33/x86_64/kernel-rt-5.10.2-200.rt20.1.fc33.ccrma.x86_64.rpm
 ```
+and set the rt-kernel as the deafult kernel
+```
+sudo grubby --set-default /boot/vmlinuz-5.10.2-200.rt20.1.fc33.ccrma.x86_64+rt
+``` 
 ### Hyperthreading
 Hyperthreading introduces 'random' latencies, so we will disable the Intel (R) Hyperthreading Options to disable the logical processor cores on processors supporting it. \
 Reboot the machine, from the `System Utilities` screen, select `System Configuration > BIOS/Platform Configuration (RBSU) > Processor Options > Intel (R) Hyperthreading Options > Disabled > Save Your Settings`. \
@@ -102,7 +106,10 @@ sudo dnf group install --with-optional virtualization
 sudo dnf install python3 vagrant ansible
 ``` 
 
-## To be continue...
+### Vagrant image
+``` 
+vagrant box add fedora/cloud-base-33
+``` 
 ----
 
 ## Acknowledgment
